@@ -34,6 +34,7 @@ class UserUpdateMe(BaseModel):
     full_name: Union[str, None] = None
     email: Union[EmailStr, None] = None
 
+
 # Database model, database table inferred from class name
 class User(UserBase, table=True):
     id: Union[int, None] = Field(default=None, primary_key=True)

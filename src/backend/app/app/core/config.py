@@ -59,7 +59,7 @@ class Settings(BaseSettings):
             username=values.data["POSTGRES_USER"],
             password=values.data["POSTGRES_PASSWORD"],
             host=values.data["POSTGRES_SERVER"],
-            path=f"/{values.data['POSTGRES_DB'] or ''}",
+            path=f"{values.data['POSTGRES_DB'] or ''}",
         )
 
     SMTP_TLS: bool = True
