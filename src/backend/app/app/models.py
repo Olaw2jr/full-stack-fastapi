@@ -1,12 +1,12 @@
 from typing import Union
 
 from pydantic import BaseModel, EmailStr
-from sqlmodel import Field, Relationship, SQLModel
+from sqlmodel import Field, Relationship, SQLModel, AutoString
 
 
 # Shared properties
 class UserBase(SQLModel):
-    email: EmailStr = Field(unique=True, index=True)
+    email: EmailStr = Field(unique=True, index=True, sa_type=AutoString)
     is_active: bool = True
     is_superuser: bool = False
     full_name: Union[str, None] = None
