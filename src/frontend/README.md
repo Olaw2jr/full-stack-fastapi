@@ -1,46 +1,17 @@
-# frontend
+# Full Stack FastAPI and PostgreSQL - Frontend
 
-## Node Requirements
-You can use either [fnm](https://github.com/Schniz/fnm) or [nvm](https://github.com/nvm-sh/nvm) to manage your Node.js versions.
+## Generate Client
 
-### Using nvm
-If you prefer nvm, run the following command to install the recommended Node.js version:
-```
-nvm install
-```
+- Start the Docker Compose stack.
+- Download the OpenAPI JSON file from `http://localhost/api/v1/openapi.json` and copy it to a new file `openapi.json` next to the `package.json` file.
+- To simplify the names in the generated frontend client code, modifying the `openapi.json` file, run:
 
-### Using fnm
-If you prefer fnm, run the following command to install the recommended Node.js version:
-```
-fnm install
+```bash
+node modify-openapi-operationids.js
 ```
 
-## Project setup
-```
-npm install
-```
+- To generate or update the frontend client, run:
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Run your unit tests
-```
-npm run test:unit
+```bash
+npm run generate-client
 ```
