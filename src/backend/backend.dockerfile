@@ -1,4 +1,4 @@
-FROM python:3.12-slim AS build-stage
+FROM python:3.13.0a6-slim AS build-stage
 
 LABEL maintainer="Oscar Olotu <oscar@chai.co.tz>"
 
