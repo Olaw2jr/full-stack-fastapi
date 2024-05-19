@@ -1,3 +1,53 @@
+import { z } from "zod";
+
+export const signInSchema = z.object({
+  username: z.string().email("Invalid email format").min(1, "Email is required"),
+  password: z
+    .string()
+    .min(8, "Password must be at least 8 characters long")
+    .regex(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*\(\)])[a-zA-Z0-9!@#\$%\^&\*\(\)]+$/,
+      "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character"
+    )
+    .min(1, "Password is required"),
+  remember: z.boolean().optional(),
+});
+
+export const signUpSchema = z
+  .object({
+    username: z
+      .string()
+      .email("Please enter a valid email address")
+      .min(1, "Email is required"),
+    password: z
+      .string()
+      .min(8, "Password must be at least 8 characters long")
+      .regex(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*\(\)])[a-zA-Z0-9!@#\$%\^&\*\(\)]+$/,
+        "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character"
+      )
+      .min(1, "Password is required"),
+    confirmPassword: z
+      .string()
+      .min(8, "Password must be at least 8 characters long")
+      .regex(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*\(\)])[a-zA-Z0-9!@#\$%\^&\*\(\)]+$/,
+        "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character"
+      )
+      .min(1, "Password is required"),
+    isTermsChecked: z.boolean().optional().default(false),
+  })
+  .superRefine(({ confirmPassword, password }, ctx) => {
+    if (confirmPassword !== password) {
+      ctx.addIssue({
+        code: "custom",
+        message: "The passwords did not match",
+      });
+    }
+  });
+
+
+
 export const emailPattern = {
   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
   message: "Invalid email address",
